@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +18,8 @@ import com.mdane.composeSandbox.ui.theme.ComposeTheme
 
 @Composable
 fun Screen2(navController: NavController, screen2ViewModel: Screen2ViewModel) {
+    val title = screen2ViewModel.title.collectAsState(initial = "")
+
     Column(modifier = Modifier
         .fillMaxHeight()
         .background(Color.LightGray), verticalArrangement = Arrangement.Bottom) {
@@ -26,7 +29,7 @@ fun Screen2(navController: NavController, screen2ViewModel: Screen2ViewModel) {
     }
     Column(modifier = Modifier
         .fillMaxHeight(), verticalArrangement = Arrangement.Top) {
-        MyScreenTitle(title = "Screen 2")
+        MyScreenTitle(title = title.value)
     }
 }
 
