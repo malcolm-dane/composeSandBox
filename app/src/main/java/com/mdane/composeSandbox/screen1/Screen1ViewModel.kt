@@ -40,8 +40,37 @@ rememberSaveable retains the state across configuration changes by saving it in 
                     for(i in 5 downTo 1) {
                     _title.emit("Screen 1: title $i")
                     delay(2000)
-                }
+
+                    if(i==1){
+                        emitThis(_title)
+
+                    }
+                    }
 
             }}
         }
-}}
+}
+
+    //Now it just loops forever. Need to add httpclient and repo so I can emit from the cloud
+private suspend fun emitThis(_title: MutableSharedFlow<String>) {
+    for(i in 1 .. 5) {
+        _title.emit("Screen 1: title $i")
+        delay(2000)
+
+
+        if(i >= 5)
+        {
+            for(i in 5 downTo 1) {
+                _title.emit("Screen 1: title $i")
+                delay(2000)
+                if(i==1){
+                    emitThis(_title)
+
+                }
+            }
+
+        }}
+
+}
+
+}
